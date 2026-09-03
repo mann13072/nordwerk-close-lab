@@ -13,7 +13,7 @@ implementation plan:
 - deterministic master data and chart-of-accounts schemas;
 - five economic event types: customer invoice, customer receipt, supplier
   invoice, supplier payment, and fixed-asset acquisition;
-- exactly 100 typed events, producing balanced journal documents;
+- exactly 60 typed events, producing balanced journal documents;
 - AR/AP linkage and open-item derivation;
 - CSV export under `data/raw/smoke_test/`;
 - validation tests for journal integrity, master-data validity, subledger
