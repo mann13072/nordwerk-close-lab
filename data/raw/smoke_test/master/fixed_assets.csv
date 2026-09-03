@@ -1,0 +1,31 @@
+asset_id,asset_class,description,acquisition_date,in_service_date,acquisition_cost,useful_life_months,depreciation_method,cost_center_id,accumulated_depreciation_opening
+FA001,machinery,Synthetic asset 001,2025-01-15,2025-02-01,52500.00,84,straight_line,CC100,0.00
+FA002,machinery,Synthetic asset 002,2025-01-15,2025-02-01,55000.00,84,straight_line,CC110,0.00
+FA003,machinery,Synthetic asset 003,2025-01-15,2025-02-01,57500.00,84,straight_line,CC120,0.00
+FA004,machinery,Synthetic asset 004,2025-01-15,2025-02-01,60000.00,84,straight_line,CC130,0.00
+FA005,machinery,Synthetic asset 005,2025-01-15,2025-02-01,62500.00,84,straight_line,CC200,0.00
+FA006,machinery,Synthetic asset 006,2025-01-15,2025-02-01,65000.00,84,straight_line,CC300,0.00
+FA007,machinery,Synthetic asset 007,2025-01-15,2025-02-01,67500.00,84,straight_line,CC400,0.00
+FA008,machinery,Synthetic asset 008,2025-01-15,2025-02-01,70000.00,84,straight_line,CC500,0.00
+FA009,machinery,Synthetic asset 009,2025-01-15,2025-02-01,72500.00,84,straight_line,CC100,0.00
+FA010,machinery,Synthetic asset 010,2025-01-15,2025-02-01,75000.00,84,straight_line,CC110,0.00
+FA011,machinery,Synthetic asset 011,2025-01-15,2025-02-01,77500.00,84,straight_line,CC120,0.00
+FA012,machinery,Synthetic asset 012,2025-01-15,2025-02-01,80000.00,84,straight_line,CC130,0.00
+FA013,machinery,Synthetic asset 013,2025-01-15,2025-02-01,82500.00,84,straight_line,CC200,0.00
+FA014,machinery,Synthetic asset 014,2025-01-15,2025-02-01,85000.00,84,straight_line,CC300,0.00
+FA015,machinery,Synthetic asset 015,2025-01-15,2025-02-01,87500.00,84,straight_line,CC400,0.00
+FA016,machinery,Synthetic asset 016,2025-01-15,2025-02-01,90000.00,84,straight_line,CC500,0.00
+FA017,machinery,Synthetic asset 017,2025-01-15,2025-02-01,92500.00,84,straight_line,CC100,0.00
+FA018,machinery,Synthetic asset 018,2025-01-15,2025-02-01,95000.00,84,straight_line,CC110,0.00
+FA019,machinery,Synthetic asset 019,2025-01-15,2025-02-01,97500.00,84,straight_line,CC120,0.00
+FA020,machinery,Synthetic asset 020,2025-01-15,2025-02-01,100000.00,84,straight_line,CC130,0.00
+FA021,IT equipment,Synthetic asset 021,2025-01-15,2025-02-01,102500.00,36,straight_line,CC200,0.00
+FA022,IT equipment,Synthetic asset 022,2025-01-15,2025-02-01,105000.00,36,straight_line,CC300,0.00
+FA023,IT equipment,Synthetic asset 023,2025-01-15,2025-02-01,107500.00,36,straight_line,CC400,0.00
+FA024,IT equipment,Synthetic asset 024,2025-01-15,2025-02-01,110000.00,36,straight_line,CC500,0.00
+FA025,IT equipment,Synthetic asset 025,2025-01-15,2025-02-01,112500.00,36,straight_line,CC100,0.00
+FA026,IT equipment,Synthetic asset 026,2025-01-15,2025-02-01,115000.00,36,straight_line,CC110,0.00
+FA027,IT equipment,Synthetic asset 027,2025-01-15,2025-02-01,117500.00,36,straight_line,CC120,0.00
+FA028,IT equipment,Synthetic asset 028,2025-01-15,2025-02-01,120000.00,36,straight_line,CC130,0.00
+FA029,IT equipment,Synthetic asset 029,2025-01-15,2025-02-01,122500.00,36,straight_line,CC200,0.00
+FA030,IT equipment,Synthetic asset 030,2025-01-15,2025-02-01,125000.00,36,straight_line,CC300,0.00

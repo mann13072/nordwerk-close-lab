@@ -1,0 +1,3 @@
+asset_id,invoice_id,vendor_id,acquisition_date,net_amount,local_amount,cost_center_id
+FA001,FA-202603-0001,V031,2026-03-06,92500.00,92500.00,CC400
+FA002,FA-202603-0002,V032,2026-03-11,100000.00,100000.00,CC400

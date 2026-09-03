@@ -1,0 +1,18 @@
+reporting_basis: hgb_based_management_close
+functional_currency: EUR
+vat:
+  domestic_rate: 0.19
+  domestic_country: DE
+thresholds:
+  manual_journal_review_eur: 25000
+  reconciliation_difference_eur: 0
+  calculation_to_journal_tolerance_eur: 0.01
+  management_pack_rounding_eur: 1000
+currency:
+  transaction_rate_policy: transaction_date_rate
+  closing_rate_policy: 2026-03-31-approved-spot-rate
+  local_amount_rounding: half_up_to_eur_cent
+disclosures:
+  - March is a management close, not an HGB statutory annual close.
+  - The ledger is HGB-based and educational; it is not audited.
+  - Source exports are synthetic and ERP-shaped; no SAP instance was used.

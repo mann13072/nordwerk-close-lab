@@ -1,0 +1,9 @@
+cost_center_id,cost_center_name,department,manager_role,profit_center_id,valid_from,valid_to
+CC100,Production,Operations,Production Manager,PC10,2026-01-01,2099-12-31
+CC110,Maintenance,Operations,Maintenance Manager,PC10,2026-01-01,2099-12-31
+CC120,Quality,Operations,Quality Manager,PC10,2026-01-01,2099-12-31
+CC130,Warehouse and Logistics,Operations,Logistics Manager,PC10,2026-01-01,2099-12-31
+CC200,Procurement,Commercial,Procurement Manager,PC20,2026-01-01,2099-12-31
+CC300,Sales,Commercial,Sales Director,PC20,2026-01-01,2099-12-31
+CC400,Engineering,Technical,Engineering Manager,PC30,2026-01-01,2099-12-31
+CC500,Finance HR and Administration,Corporate,Finance Manager,PC30,2026-01-01,2099-12-31

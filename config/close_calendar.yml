@@ -1,0 +1,13 @@
+period: 2026-03
+close_target: D+5
+tasks:
+  - [T01, D-3, Launch close calendar and assign responsibilities, null, true]
+  - [T02, D-3, Send cut-off notice, T01, true]
+  - [T03, D-2, Confirm goods movements and delivery documents, T02, true]
+  - [T04, D-2, Confirm services received but not invoiced, T02, false]
+  - [T05, D-1, Run preliminary trial balance and master-data checks, T01, true]
+  - [T06, D0, Freeze immutable source extracts, T03, true]
+  - [T07, D+1, Run data-integrity validation, T06, true]
+  - [T08, D+1, Prepare bank reconciliation, T07, true]
+  - [T09, D+1, Prepare AR reconciliation and aging, T07, true]
+  - [T11, D+1, Prepare AP reconciliation, T07, true]

@@ -1,0 +1,26 @@
+customer_id,customer_name_synthetic,country,currency,payment_terms_days,credit_limit,related_party_flag
+C001,Synthetic Customer 001,DE,EUR,30,275000.00,false
+C002,Synthetic Customer 002,DE,EUR,30,300000.00,false
+C003,Synthetic Customer 003,DE,EUR,45,325000.00,false
+C004,Synthetic Customer 004,NL,EUR,30,350000.00,false
+C005,Synthetic Customer 005,FR,EUR,30,375000.00,false
+C006,Synthetic Customer 006,DE,EUR,45,400000.00,false
+C007,Synthetic Customer 007,DE,EUR,30,425000.00,false
+C008,Synthetic Customer 008,DE,EUR,30,450000.00,false
+C009,Synthetic Customer 009,NL,EUR,45,475000.00,false
+C010,Synthetic Customer 010,FR,EUR,30,500000.00,false
+C011,Synthetic Customer 011,DE,EUR,30,525000.00,false
+C012,Synthetic Customer 012,DE,EUR,45,550000.00,false
+C013,Synthetic Customer 013,DE,EUR,30,575000.00,false
+C014,Synthetic Customer 014,NL,EUR,30,600000.00,false
+C015,Synthetic Customer 015,FR,EUR,45,625000.00,false
+C016,Synthetic Customer 016,DE,EUR,30,650000.00,false
+C017,Synthetic Customer 017,DE,EUR,30,675000.00,false
+C018,Synthetic Customer 018,DE,EUR,45,700000.00,false
+C019,Synthetic Customer 019,NL,EUR,30,725000.00,false
+C020,Synthetic Customer 020,FR,EUR,30,750000.00,false
+C021,Synthetic Customer 021,DE,EUR,45,775000.00,false
+C022,Synthetic Customer 022,DE,EUR,30,800000.00,false
+C023,Synthetic Customer 023,DE,EUR,30,825000.00,false
+C024,Synthetic Customer 024,NL,EUR,45,850000.00,false
+C025,Synthetic Customer 025,FR,EUR,30,875000.00,false

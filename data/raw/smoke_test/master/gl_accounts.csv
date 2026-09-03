@@ -1,0 +1,9 @@
+account_id,account_name,account_type,normal_balance,open_item_managed,cost_center_required,fx_remeasurement,hgb_bs_line,hgb_pl_line,management_pl_line,cash_flow_tag
+100000,Main bank,asset,debit,false,false,false,B.IV Cash,,,operating
+110000,Trade receivables,asset,debit,true,false,true,B.II Trade receivables,,,operating
+140000,Input VAT,asset,debit,false,false,false,B.II Other assets,,,operating
+150000,Machinery,asset,debit,false,true,false,A.II.2 Technical equipment and machinery,,,investing
+200000,Trade payables,liability,credit,true,false,true,C.4 Trade payables,,,operating
+230000,Output VAT,liability,credit,false,false,false,C.8 Other liabilities,,,operating
+400000,Product revenue,revenue,credit,false,false,false,,1. Sales revenue,Revenue,operating
+570000,Professional and external services,expense,debit,false,true,false,,5. Cost of materials,External services,operating

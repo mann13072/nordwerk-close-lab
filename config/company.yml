@@ -1,0 +1,19 @@
+company:
+  name: NordWerk Cooling Systems GmbH
+  legal_form: German GmbH
+  location: Leipzig, Germany
+  company_code: DE01
+  controlling_area: NW01
+  functional_currency: EUR
+  reporting_currency: EUR
+  reporting_period: 2026-03
+  data_classification: synthetic
+cost_centres:
+  - [CC100, Production, Operations, Production Manager, PC10]
+  - [CC110, Maintenance, Operations, Maintenance Manager, PC10]
+  - [CC120, Quality, Operations, Quality Manager, PC10]
+  - [CC130, Warehouse and Logistics, Operations, Logistics Manager, PC10]
+  - [CC200, Procurement, Commercial, Procurement Manager, PC20]
+  - [CC300, Sales, Commercial, Sales Director, PC20]
+  - [CC400, Engineering, Technical, Engineering Manager, PC30]
+  - [CC500, Finance HR and Administration, Corporate, Finance Manager, PC30]
