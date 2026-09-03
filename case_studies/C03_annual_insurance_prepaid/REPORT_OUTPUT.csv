@@ -1,0 +1,3 @@
+reporting_period,metric,comparison_type,pre_close_actual_eur,budget_or_expected_eur,adjustment_eur,post_close_actual_eur,post_close_variance_eur,unit,source_reference
+2026-YTD-Jan-Mar,Insurance expense,budget,120000.00,30000.00,-90000.00,30000.00,0.00,EUR,EVID-C03-GL-001;CALC-C03-001
+2026-03-31,Prepaid insurance,expected closing balance,0.00,90000.00,90000.00,90000.00,0.00,EUR,CALC-C03-001;REC-C03-001

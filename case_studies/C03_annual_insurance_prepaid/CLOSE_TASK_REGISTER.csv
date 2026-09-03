@@ -1,0 +1,7 @@
+task_id,close_day,task,owner,reviewer,status,evidence_reference,completed_date,notes
+C03-T01,D+1,Obtain annual policy and bank confirmation,Finance Analyst (simulated),Financial Controller (simulated),Complete,EVID-C03-POL-001;EVID-C03-BANK-001,2026-04-01,Confirm coverage period and cash movement
+C03-T02,D+1,Compare pre-close expense to service period,Finance Analyst (simulated),Financial Controller (simulated),Complete,EVID-C03-GL-001;EVID-C03-CALC-001,2026-04-01,Identify nine-month prepaid balance
+C03-T03,D+2,Prepare and calculate adjusting journal,Finance Analyst (simulated),Financial Controller (simulated),Complete,CALC-C03-001,2026-04-01,Journal exceeds EUR 25,000 review threshold
+C03-T04,D+2,Review and approve manual journal,Financial Controller (simulated),Finance Manager (simulated),Complete,EVID-C03-APP-001,2026-04-02,Approval recorded in simulation
+C03-T05,D+2,Post journal to March management close,Finance Analyst (simulated),Financial Controller (simulated),Complete,MJ-C03-001,2026-04-02,No April reversal because schedule continues
+C03-T06,D+3,Reconcile prepaid balance to schedule,Finance Analyst (simulated),Financial Controller (simulated),Complete,REC-C03-001,2026-04-03,Unexplained difference is EUR 0

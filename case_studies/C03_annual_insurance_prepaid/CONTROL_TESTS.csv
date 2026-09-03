@@ -1,0 +1,11 @@
+control_id,control,test_basis,expected_result,result,evidence_or_output,review_note
+CT-C03-001,Coverage period is supported by source evidence,Policy states 2026-01-01 to 2026-12-31,12 coverage months,Pass,EVID-C03-POL-001,Human review of contract remains required
+CT-C03-002,Monthly expense calculation,120000 / 12,10000.00 per month,Pass,EVID-C03-CALC-001,Decimal calculation to cents
+CT-C03-003,Consumed period through close,3 months x 10000,30000.00 expense,Pass,EVID-C03-CALC-001,Jan-Mar recognized
+CT-C03-004,Future-period balance,9 months x 10000,90000.00 prepaid,Pass,EVID-C03-CALC-001,Apr-Dec deferred
+CT-C03-005,Journal arithmetic,Debit 90000 equals credit 90000,Zero document difference,Pass,MJ-C03-001,Manual journal balanced
+CT-C03-006,Prepaid reconciliation,Adjusted GL equals independent schedule,EUR 0 unexplained difference,Pass,REC-C03-001,Reconciliation may not be marked complete with a difference
+CT-C03-007,Manual-journal review threshold,Adjustment is above EUR 25000,Reviewer approval required,Pass,EVID-C03-APP-001,Fictional project control threshold
+CT-C03-008,Reversal treatment,Reclassification is supported by continuing schedule,No April 1 reversal,Pass,MANUAL_JOURNAL_REGISTER.csv,Use monthly amortization instead
+CT-C03-009,Negative challenge,Remove policy evidence,Case cannot be approved without coverage support,Review required,EVID-C03-POL-001,Do not infer future coverage from payment date alone
+CT-C03-010,VAT treatment,Insurance premium is treated as not carrying recoverable VAT,No input-VAT entry,Pass,EVID-C03-POL-001,Do not introduce input VAT without evidence

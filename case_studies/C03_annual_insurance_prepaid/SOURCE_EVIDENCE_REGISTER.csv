@@ -1,0 +1,6 @@
+evidence_reference,source_type,file_name,source_date,description,amount_eur,coverage_or_period,owner,status
+EVID-C03-POL-001,Insurance policy,SYNTHETIC_INSURANCE_POLICY.md,2026-01-01,Annual property and production-liability coverage,120000.00,2026-01-01 to 2026-12-31,Procurement,Simulated
+EVID-C03-BANK-001,Bank statement,SYNTHETIC_BANK_PAYMENT_EXTRACT.md,2026-01-02,Payment to synthetic insurer reference INS-2026-001,-120000.00,2026-01-02,Finance,Simulated
+EVID-C03-GL-001,General-ledger detail,SYNTHETIC_LEDGER_DETAIL.md,2026-01-02,Full premium originally posted to insurance expense,120000.00,2026-01-02 to 2026-12-31,Finance,Simulated
+EVID-C03-CALC-001,Prepayment schedule,PREPAYMENT_CALCULATION.csv,2026-03-31,Three consumed months and nine remaining months,90000.00,2026-03-31 closing balance,Finance,Prepared
+EVID-C03-APP-001,Journal approval note,SYNTHETIC_JOURNAL_APPROVAL.md,2026-04-02,Review of EUR 90,000 adjustment above manual-journal threshold,90000.00,March close,Financial Controller,Approved in simulation

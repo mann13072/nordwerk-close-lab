@@ -1,0 +1,2 @@
+reconciliation_id,account_id,account_name,gl_balance_before_adjustment_eur,independent_support_balance_eur,reconciling_item_eur,adjusted_gl_balance_eur,adjusted_support_balance_eur,unexplained_difference_eur,preparer,reviewer,status,evidence_reference,required_action,expected_clear_date
+REC-C03-001,130100,Aktiver Rechnungsabgrenzungsposten (ARAP),0.00,90000.00,90000.00,90000.00,90000.00,0.00,Finance Analyst (simulated),Financial Controller (simulated),Complete in simulation,EVID-C03-POL-001;EVID-C03-CALC-001,Maintain monthly amortization schedule,2026-04-30

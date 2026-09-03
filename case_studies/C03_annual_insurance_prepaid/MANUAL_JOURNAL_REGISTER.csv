@@ -1,0 +1,2 @@
+journal_id,case_id,rationale,calculation_reference,evidence_reference,preparer,preparation_date,reviewer,review_status,posting_status,reversal_required,reversal_date,late_journal_flag
+MJ-C03-001,C03,Reclassify nine unconsumed insurance months from expense to prepaid insurance,EVID-C03-CALC-001,EVID-C03-POL-001;EVID-C03-GL-001,Finance Analyst (simulated),2026-04-01,Financial Controller (simulated),Approved in simulation,Posted in simulation,No,,No
