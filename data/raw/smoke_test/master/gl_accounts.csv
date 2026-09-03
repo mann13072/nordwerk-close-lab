@@ -2,6 +2,7 @@ account_id,account_name,account_type,normal_balance,open_item_managed,cost_cente
 100000,Main bank,asset,debit,false,false,false,B.IV Cash,,,operating
 110000,Trade receivables,asset,debit,true,false,true,B.II Trade receivables,,,operating
 140000,Input VAT,asset,debit,false,false,false,B.II Other assets,,,operating
+120000,Raw material inventory,asset,debit,false,false,false,B.I.2 Raw materials,,,operating
 150000,Machinery,asset,debit,false,true,false,A.II.2 Technical equipment and machinery,,,investing
 200000,Trade payables,liability,credit,true,false,true,C.4 Trade payables,,,operating
 230000,Output VAT,liability,credit,false,false,false,C.8 Other liabilities,,,operating

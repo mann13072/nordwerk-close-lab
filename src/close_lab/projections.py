@@ -56,9 +56,10 @@ class AssetAddition:
     cost_center_id: str
 
 
-def build_ar_open_items(events: Iterable[Event], as_of: date = date(2026, 3, 31)) -> tuple[AROpenItem, ...]:
+def build_ar_open_items(events: Iterable[Event], master_data: MasterData | None = None, as_of: date = date(2026, 3, 31)) -> tuple[AROpenItem, ...]:
     invoices = [event for event in events if isinstance(event, CustomerInvoice)]
     receipts = [event for event in events if isinstance(event, CustomerReceipt)]
+    terms = {row.customer_id: row.payment_terms_days for row in master_data.customers} if master_data else {}
     by_invoice: dict[str, list[CustomerReceipt]] = {}
     for receipt in receipts:
         by_invoice.setdefault(receipt.invoice_id, []).append(receipt)
@@ -69,9 +70,10 @@ def build_ar_open_items(events: Iterable[Event], as_of: date = date(2026, 3, 31)
         cleared = money(sum((item.amount for item in linked), Decimal("0")))
         open_amount = money(original - cleared)
         last = linked[-1] if linked else None
+        due_days = terms.get(invoice.customer_id, 30)
         rows.append(
             AROpenItem(invoice.customer_id, invoice.invoice_id, invoice.document_date,
-                       date.fromordinal(invoice.document_date.toordinal() + 30), invoice.currency,
+                       date.fromordinal(invoice.document_date.toordinal() + due_days), invoice.currency,
                        original, cleared, open_amount, money(open_amount * invoice.exchange_rate),
                        last.document_id if last else None, last.posting_date if last else None,
                        max(0, (as_of - invoice.document_date).days - 30)),
@@ -79,9 +81,10 @@ def build_ar_open_items(events: Iterable[Event], as_of: date = date(2026, 3, 31)
     return tuple(sorted(rows, key=lambda row: row.invoice_id))
 
 
-def build_ap_open_items(events: Iterable[Event], as_of: date = date(2026, 3, 31)) -> tuple[APOpenItem, ...]:
+def build_ap_open_items(events: Iterable[Event], master_data: MasterData | None = None, as_of: date = date(2026, 3, 31)) -> tuple[APOpenItem, ...]:
     invoices = [event for event in events if isinstance(event, (SupplierInvoice, FixedAssetAcquisition))]
     payments = [event for event in events if isinstance(event, SupplierPayment)]
+    terms = {row.vendor_id: row.payment_terms_days for row in master_data.vendors} if master_data else {}
     by_invoice: dict[str, list[SupplierPayment]] = {}
     for payment in payments:
         by_invoice.setdefault(payment.invoice_id, []).append(payment)
@@ -92,7 +95,8 @@ def build_ap_open_items(events: Iterable[Event], as_of: date = date(2026, 3, 31)
         cleared = money(sum((item.amount for item in linked), Decimal("0")))
         open_amount = money(original - cleared)
         last = linked[-1] if linked else None
-        due_date = date.fromordinal(invoice.document_date.toordinal() + 30)
+        due_days = terms.get(invoice.vendor_id, 30)
+        due_date = date.fromordinal(invoice.document_date.toordinal() + due_days)
         rows.append(
             APOpenItem(invoice.vendor_id, invoice.invoice_id, invoice.document_date, due_date, invoice.currency,
                        original, cleared, open_amount, money(open_amount * invoice.exchange_rate),

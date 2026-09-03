@@ -1,0 +1,4 @@
+profit_center_id,profit_center_name,valid_from,valid_to
+PC10,Cooling Pumps,2026-01-01,2099-12-31
+PC20,Thermal Valves,2026-01-01,2099-12-31
+PC30,Control Modules,2026-01-01,2099-12-31

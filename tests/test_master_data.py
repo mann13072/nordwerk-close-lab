@@ -13,4 +13,4 @@ def test_master_data_has_required_shapes_and_unique_keys():
     assert {account.account_id for account in build_chart_of_accounts()} >= {
         "100000", "110000", "140000", "150000", "200000", "230000", "400000", "570000"
     }
-    assert validate_master_data(master_data) == []
+    assert validate_master_data(master_data, build_chart_of_accounts()) == []

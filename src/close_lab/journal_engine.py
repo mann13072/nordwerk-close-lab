@@ -162,8 +162,13 @@ def _validate_common(event: Event, master_data: MasterData, accounts: dict[str, 
             raise PostingError(f"unknown customer_id: {event.customer_id}")
         if isinstance(event, CustomerInvoice) and event.country != customer_map[event.customer_id].country:
             raise PostingError(f"customer invoice country does not match master: {event.customer_id}")
-        if isinstance(event, CustomerInvoice) and event.profit_center_id not in {"PC10", "PC20", "PC30"}:
-            raise PostingError(f"unknown profit_center_id: {event.profit_center_id}")
+        if isinstance(event, CustomerInvoice):
+            profit_centers = {row.profit_center_id: row for row in master_data.profit_centers}
+            profit_center = profit_centers.get(event.profit_center_id)
+            if profit_center is None:
+                raise PostingError(f"unknown profit_center_id: {event.profit_center_id}")
+            if not profit_center.valid_from <= event.posting_date <= profit_center.valid_to:
+                raise PostingError(f"profit centre is not valid on posting date: {event.profit_center_id}")
     if isinstance(event, (SupplierInvoice, SupplierPayment, FixedAssetAcquisition)):
         vendor_map = {row.vendor_id: row for row in master_data.vendors}
         vendor_ids = set(vendor_map)
@@ -179,7 +184,11 @@ def _validate_common(event: Event, master_data: MasterData, accounts: dict[str, 
     cost_center_ids = {row.cost_center_id for row in master_data.cost_centers}
     if isinstance(event, (SupplierInvoice, FixedAssetAcquisition)) and event.cost_center_id not in cost_center_ids:
         raise PostingError(f"unknown cost_center_id: {event.cost_center_id}")
-    required_accounts = {"100000", "110000", "140000", "150000", "200000", "230000", "400000"}
+    if isinstance(event, (SupplierInvoice, FixedAssetAcquisition)):
+        cost_center = next(row for row in master_data.cost_centers if row.cost_center_id == event.cost_center_id)
+        if not cost_center.valid_from <= event.posting_date <= cost_center.valid_to:
+            raise PostingError(f"cost centre is not valid on posting date: {event.cost_center_id}")
+    required_accounts = {"100000", "110000", "140000", "150000", "200000", "230000", "400000", "570000"}
     if not required_accounts.issubset(accounts):
         missing = sorted(required_accounts - set(accounts))
         raise PostingError(f"chart of accounts is missing required accounts: {missing}")
@@ -191,11 +200,21 @@ def _validate_references(events: tuple[Event, ...]) -> None:
     customer_invoices = {event.invoice_id: event for event in events if isinstance(event, CustomerInvoice)}
     supplier_invoices = {event.invoice_id: event for event in events if isinstance(event, SupplierInvoice)}
     asset_invoices = {event.invoice_id: event for event in events if isinstance(event, FixedAssetAcquisition)}
-    if len(customer_invoices) != sum(isinstance(event, CustomerInvoice) for event in events):
-        raise PostingError("duplicate customer invoice_id")
-    if len(supplier_invoices) != sum(isinstance(event, SupplierInvoice) for event in events):
-        raise PostingError("duplicate supplier invoice_id")
-    all_invoice_ids = set(customer_invoices) | set(supplier_invoices) | set(asset_invoices)
+    invoice_types: dict[str, str] = {}
+    for invoice_id, event_type in (
+        *((invoice_id, "customer") for invoice_id in customer_invoices),
+        *((invoice_id, "supplier") for invoice_id in supplier_invoices),
+        *((invoice_id, "fixed_asset") for invoice_id in asset_invoices),
+    ):
+        prior_type = invoice_types.setdefault(invoice_id, event_type)
+        if prior_type != event_type:
+            raise PostingError(f"invoice_id is reused across event types: {invoice_id}")
+    if len(invoice_types) != sum(isinstance(event, (CustomerInvoice, SupplierInvoice, FixedAssetAcquisition)) for event in events):
+        raise PostingError("duplicate invoice_id")
+    for event in events:
+        if isinstance(event, SupplierInvoice) and event.purchase_order_id is not None:
+            raise PostingError("PO-linked supplier invoices are deferred until GR/IR is implemented")
+    all_invoice_ids = set(invoice_types)
     cleared: dict[str, Decimal] = {}
     for event in events:
         if isinstance(event, CustomerReceipt):
@@ -333,8 +352,9 @@ def post_events(events: Iterable[Event], master_data: MasterData, accounts: Iter
 
 
 def header_rows(results: Iterable[PostingResult]) -> list[dict[str, object]]:
-    return [asdict(result.header) for result in results]
+    return [asdict(result.header) for result in sorted(results, key=lambda result: result.header.document_id)]
 
 
 def line_rows(results: Iterable[PostingResult]) -> list[dict[str, object]]:
-    return [asdict(line) for result in results for line in result.lines]
+    lines = [line for result in results for line in result.lines]
+    return [asdict(line) for line in sorted(lines, key=lambda line: (line.document_id, line.line_number))]

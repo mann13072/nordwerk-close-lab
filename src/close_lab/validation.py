@@ -19,10 +19,11 @@ def _duplicate(values: Iterable[object]) -> list[object]:
     return sorted(value for value, count in counts.items() if count > 1)
 
 
-def validate_master_data(master_data: MasterData) -> list[str]:
+def validate_master_data(master_data: MasterData, accounts: Iterable[GLAccount] | None = None) -> list[str]:
     issues: list[str] = []
     for name, rows, key in (
         ("cost_centers", master_data.cost_centers, "cost_center_id"),
+        ("profit_centers", master_data.profit_centers, "profit_center_id"),
         ("customers", master_data.customers, "customer_id"),
         ("vendors", master_data.vendors, "vendor_id"),
         ("materials", master_data.materials, "material_id"),
@@ -31,6 +32,17 @@ def validate_master_data(master_data: MasterData) -> list[str]:
         duplicates = _duplicate(getattr(row, key) for row in rows)
         if duplicates:
             issues.append(f"duplicate {name} keys: {duplicates}")
+    for cost_center in master_data.cost_centers:
+        if cost_center.valid_from > cost_center.valid_to:
+            issues.append(f"invalid cost-centre effective dates: {cost_center.cost_center_id}")
+    for profit_center in master_data.profit_centers:
+        if profit_center.valid_from > profit_center.valid_to:
+            issues.append(f"invalid profit-centre effective dates: {profit_center.profit_center_id}")
+    if accounts is not None:
+        account_ids = {account.account_id for account in accounts}
+        for material in master_data.materials:
+            if material.inventory_account not in account_ids:
+                issues.append(f"material {material.material_id} references unknown inventory account {material.inventory_account}")
     return issues
 
 
@@ -109,8 +121,8 @@ def validate_subledger_linkage(events: Iterable[Event], results: Iterable[Postin
         if isinstance(event, (CustomerReceipt, SupplierPayment)) and event.invoice_id not in invoices:
             issues.append(f"invalid clearing reference: {event.event_id}")
 
-    ar_items = build_ar_open_items(events)
-    ap_items = build_ap_open_items(events)
+    ar_items = build_ar_open_items(events, master_data)
+    ap_items = build_ap_open_items(events, master_data)
     if len(ar_items) != sum(isinstance(event, CustomerInvoice) for event in events):
         issues.append("AR open-item count does not equal customer invoice count")
     if len(ap_items) != sum(isinstance(event, (SupplierInvoice, FixedAssetAcquisition)) for event in events):
@@ -156,7 +168,7 @@ def validate_control_totals(events: Iterable[Event], results: Iterable[PostingRe
 
 
 def validate_smoke(events: Iterable[Event], results: Iterable[PostingResult], accounts: Iterable[GLAccount], master_data: MasterData) -> list[str]:
-    issues = validate_master_data(master_data)
+    issues = validate_master_data(master_data, accounts)
     issues.extend(validate_journal_integrity(results, accounts, master_data))
     issues.extend(validate_subledger_linkage(events, results, master_data))
     issues.extend(validate_control_totals(events, results))

@@ -8,6 +8,7 @@ from close_lab.chart_of_accounts import build_chart_of_accounts
 from close_lab.export import export_smoke
 from close_lab.journal_engine import post_events
 from close_lab.master_data import build_master_data
+from close_lab.validation import validate_smoke
 
 
 def _hashes(path: Path):
@@ -32,8 +33,10 @@ def test_different_seed_changes_transaction_values():
     first = generate_smoke_events(seed=20260331)
     second = generate_smoke_events(seed=20260332)
     assert first != second
-    assert post_events(first, master_data, accounts)
-    assert post_events(second, master_data, accounts)
+    first_results = post_events(first, master_data, accounts)
+    second_results = post_events(second, master_data, accounts)
+    assert validate_smoke(first, first_results, accounts, master_data) == []
+    assert validate_smoke(second, second_results, accounts, master_data) == []
 
 
 def test_serialized_journal_lines_rehydrate_and_balance():

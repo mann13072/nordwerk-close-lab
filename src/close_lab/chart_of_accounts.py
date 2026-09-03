@@ -32,6 +32,7 @@ def build_chart_of_accounts() -> tuple[GLAccount, ...]:
         GLAccount("100000", "Main bank", "asset", "debit", False, False, False, "B.IV Cash", "", "", "operating"),
         GLAccount("110000", "Trade receivables", "asset", "debit", True, False, True, "B.II Trade receivables", "", "", "operating"),
         GLAccount("140000", "Input VAT", "asset", "debit", False, False, False, "B.II Other assets", "", "", "operating"),
+        GLAccount("120000", "Raw material inventory", "asset", "debit", False, False, False, "B.I.2 Raw materials", "", "", "operating"),
         GLAccount("150000", "Machinery", "asset", "debit", False, True, False, "A.II.2 Technical equipment and machinery", "", "", "investing"),
         GLAccount("200000", "Trade payables", "liability", "credit", True, False, True, "C.4 Trade payables", "", "", "operating"),
         GLAccount("230000", "Output VAT", "liability", "credit", False, False, False, "C.8 Other liabilities", "", "", "operating"),

@@ -35,7 +35,7 @@ def event_rows(events: tuple[Event, ...]) -> list[dict[str, object]]:
             "currency": event.currency,
             "source_reference": source_reference,
         })
-    return rows
+    return sorted(rows, key=lambda row: (row["document_id"], row["event_id"]))
 
 
 def export_smoke(

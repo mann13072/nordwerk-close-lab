@@ -13,6 +13,7 @@ from .config import PROJECT_ROOT, SMOKE_SEED
 from .export import export_smoke
 from .journal_engine import post_events
 from .master_data import build_master_data
+from .projections import build_ap_open_items, build_ar_open_items
 from .validation import validate_smoke
 
 
@@ -54,10 +55,13 @@ def command_validate() -> int:
         for issue in issues:
             print(f"- {issue}")
         return 1
+    ar_items = build_ar_open_items(events, master_data)
+    ap_items = build_ap_open_items(events, master_data)
     print(
         "validate-smoke: PASS "
         f"events={len(events)} headers={len(results)} lines={sum(len(result.lines) for result in results)} "
-        "AR_items=20 AR_positive_open=8 AP_items=17 AP_positive_open=11"
+        f"AR_items={len(ar_items)} AR_positive_open={sum(item.open_amount > 0 for item in ar_items)} "
+        f"AP_items={len(ap_items)} AP_positive_open={sum(item.open_amount > 0 for item in ap_items)}"
     )
     return 0
 

@@ -3,7 +3,7 @@ from decimal import Decimal
 
 import pytest
 
-from close_lab.business_events import CustomerReceipt, generate_smoke_events
+from close_lab.business_events import CustomerReceipt, FixedAssetAcquisition, SupplierInvoice, generate_smoke_events
 from close_lab.chart_of_accounts import build_chart_of_accounts
 from close_lab.journal_engine import PostingError, post_events
 from close_lab.master_data import build_master_data
@@ -49,3 +49,20 @@ def test_unknown_account_is_detected():
     results = list(post_events(events, master_data, accounts))
     results[0] = replace(results[0], lines=(replace(results[0].lines[0], gl_account_id="999999"), *results[0].lines[1:]))
     assert any("unknown account" in issue for issue in validate_journal_integrity(results, accounts, master_data))
+
+
+def test_po_linked_supplier_invoice_is_deferred_until_grir_exists():
+    master_data, accounts, events = _base()
+    invoice = next(event for event in events if isinstance(event, SupplierInvoice))
+    events[events.index(invoice)] = replace(invoice, purchase_order_id="PO-UNIMPLEMENTED")
+    with pytest.raises(PostingError, match="PO-linked supplier invoices are deferred"):
+        post_events(events, master_data, accounts)
+
+
+def test_cross_type_invoice_id_reuse_is_rejected():
+    master_data, accounts, events = _base()
+    asset = next(event for event in events if isinstance(event, FixedAssetAcquisition))
+    invoice = next(event for event in events if isinstance(event, SupplierInvoice))
+    events[events.index(asset)] = replace(asset, invoice_id=invoice.invoice_id)
+    with pytest.raises(PostingError, match="reused across event types"):
+        post_events(events, master_data, accounts)

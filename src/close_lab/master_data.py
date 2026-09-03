@@ -23,6 +23,14 @@ class CostCenter:
 
 
 @dataclass(frozen=True)
+class ProfitCenter:
+    profit_center_id: str
+    profit_center_name: str
+    valid_from: date
+    valid_to: date
+
+
+@dataclass(frozen=True)
 class Customer:
     customer_id: str
     customer_name_synthetic: str
@@ -74,6 +82,7 @@ class FixedAsset:
 @dataclass(frozen=True)
 class MasterData:
     cost_centers: tuple[CostCenter, ...]
+    profit_centers: tuple[ProfitCenter, ...]
     customers: tuple[Customer, ...]
     vendors: tuple[Vendor, ...]
     materials: tuple[Material, ...]
@@ -94,6 +103,11 @@ def build_master_data() -> MasterData:
         CostCenter("CC300", "Sales", "Commercial", "Sales Director", "PC20", date(2026, 1, 1), date(2099, 12, 31)),
         CostCenter("CC400", "Engineering", "Technical", "Engineering Manager", "PC30", date(2026, 1, 1), date(2099, 12, 31)),
         CostCenter("CC500", "Finance HR and Administration", "Corporate", "Finance Manager", "PC30", date(2026, 1, 1), date(2099, 12, 31)),
+    )
+    profit_centers = (
+        ProfitCenter("PC10", "Cooling Pumps", date(2026, 1, 1), date(2099, 12, 31)),
+        ProfitCenter("PC20", "Thermal Valves", date(2026, 1, 1), date(2099, 12, 31)),
+        ProfitCenter("PC30", "Control Modules", date(2026, 1, 1), date(2099, 12, 31)),
     )
 
     customer_countries = ("DE", "DE", "DE", "NL", "FR")
@@ -156,12 +170,13 @@ def build_master_data() -> MasterData:
         for i in range(1, 31)
     )
 
-    return MasterData(cost_centers, customers, vendors, materials, fixed_assets)
+    return MasterData(cost_centers, profit_centers, customers, vendors, materials, fixed_assets)
 
 
 def master_rows(master_data: MasterData) -> dict[str, list[dict[str, object]]]:
     return {
         "cost_centres": _rows(master_data.cost_centers),
+        "profit_centres": _rows(master_data.profit_centers),
         "customers": _rows(master_data.customers),
         "vendors": _rows(master_data.vendors),
         "materials": _rows(master_data.materials),
