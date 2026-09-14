@@ -1,5 +1,9 @@
 # NordWerk D+5 Month-End Close Lab
 
+> **Author:** [Mann D. Shah](https://github.com/mann13072) · Financial Controller & Systems Architect  
+> **Portfolio & Related Repositories:** [recon-platform](https://github.com/mann13072/recon-platform) · [SolarChain Twin](https://github.com/mann13072/Supply-chain-SIMulator-main) · [Cash-Flow Risk Simulator](https://github.com/mann13072/project-cash-flow-risk-simulator) · [Full Portfolio](https://github.com/mann13072)
+
+
 This portfolio project simulates the March 2026 D+5 management close of
 NordWerk Cooling Systems GmbH, a fictional German automotive-components
 manufacturer. It uses an HGB-based local ledger and ERP-shaped synthetic
